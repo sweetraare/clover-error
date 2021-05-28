@@ -27,7 +27,7 @@ exports.charge = (req, res) => {
 
   const headers = {
     accept: "application/json",
-    Authorization: "Bearer 01ef07c3-4f90-1e7e-02b0-6878f3881800",
+    Authorization: `Bearer ${process.env.CLOVER_AUTHENTICATION}`,
     "idempotency-key": v4(),
     "content-type": "application/json",
   };
