@@ -1,6 +1,6 @@
 const { databaseFirebase } = require("../config");
 
-const UsersRef = databaseFirebase.ref("/users");
+const UsersRef = databaseFirebase.ref("users");
 
 exports.addUser = (uid, obj) => {
   return UsersRef.child(uid).set(obj);
