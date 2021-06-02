@@ -1,6 +1,5 @@
-const firebase = require("firebase/app");
-
-require("firebase/firebase-database");
+const admin = require('firebase-admin');
+const { ERORR_MESSAGES } = require('../commons/errorMessages');
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -14,6 +13,14 @@ const config = {
 
 console.log(config);
 
-firebase.initializeApp(config);
+admin.initializeApp(config);
 
-exports.databaseFirebase = firebase.database();
+const connectedRef = admin.database().ref(".info/connected");
+
+connectedRef.on(
+  "value",
+  (snap) => !!snap.val()
+    ? console.log('Conectado')
+    : console.log(ERORR_MESSAGES.DB_DISCONNECT));
+
+exports.databaseFirebase = admin.database();
